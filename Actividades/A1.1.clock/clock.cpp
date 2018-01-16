@@ -3,13 +3,20 @@ using namespace std;
 class Clock
 {
 	private:
-		static Clock* intance; 
-		Clock()
-		{
-					
-		}
+		static Clock* intance;  
+		~Clock(){}
+		Clock(){}
 	public:
-		
+		static Clock* deleteIntance()
+		{
+			if (intance != NULL)
+			{
+				 delete intance; 
+				intance = NULL;	
+			}
+			return intance;	
+ 
+		}
 		static Clock* getInstance()
 		{
 			if (intance == 0)
@@ -20,7 +27,11 @@ class Clock
 		}
 		void getTime()
 		{
-			cout<<"son las 8"<< endl;
+			char datetime[30];
+			time_t current_time = time(NULL);
+			ctime(&current_time);
+			strcpy(datetime, ctime(&current_time));
+			cout << "Hora actual: " << datetime;
 		}
 	
 
@@ -30,11 +41,7 @@ int main()
 {
 	Clock* instance1 =Clock::getInstance();
 	instance1->getTime();
-	Clock* instance2 =Clock::getInstance();
-	instance1->getTime();
-	cout<<instance1<< endl;
-	cout<<instance2<< endl;
-	//Clock::getInstance();
+	instance1->deleteIntance();
 	return 0;
 }
 
