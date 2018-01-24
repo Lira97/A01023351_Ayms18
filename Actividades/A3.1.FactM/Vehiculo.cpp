@@ -4,40 +4,36 @@ using namespace std;
 class Product
 {
 	public:
-		virtual void operacion1()=0;
-		virtual void operacion2()=0;
+		virtual void Ensamble()=0;
+		virtual void Hojalateria()=0;
+		virtual void Pintura()=0;
+		virtual void Entrega()=0;
 };
 
 class Producto1 : public Product
 {
 	public:
-	void operacion1()
+	void Ensamble()
 	{
-		cout<<"estoy en operacion 1 Prod 1"<<endl;
+		cout<<"estoy en operacion Ensamble Prod 1"<<endl;
 		
 	}
-	void operacion2()
+	void Hojalateria()
 	{
-		cout<<"estoy en operacion 2 Prod 1"<<endl;
+		cout<<"estoy en operacion Hojalateria Prod 1"<<endl;
+			
+	}
+	void Pintura()
+	{
+		cout<<"estoy en operacion Pintura Prod 1"<<endl;
+				
+	}
+	void Entrega ()
+	{
+		cout<<"estoy en operacion Entrega Prod 1"<<endl;
 			
 	}
 };
-
-class Producto2 : public Product
-{
-	public:
-	void operacion1()
-	{
-		cout<<"estoy en operacion 1 Prod 2";
-		
-	}
-	void operacion2()
-	{
-		cout<<"estoy en operacion 2 Prod 2";
-			
-	}
-};
-
 
 class Creator{
 		template<class Vehiculo>
@@ -51,8 +47,10 @@ class Creator{
 		{
 			Vehiculo* temporal;
 			temporal = factoryMethod<Vehiculo>();
-			temporal->operacion1();
-			temporal->operacion2();
+			temporal->Ensamble();
+			temporal->Hojalateria();
+			temporal->Pintura();
+			temporal-> Entrega ();
 			return temporal;
 		}
 };
