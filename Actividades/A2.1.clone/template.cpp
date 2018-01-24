@@ -32,9 +32,7 @@ class ClonMobile : public Padre{
 		Padre* clone()
 			{ 
 				return new SubClase(dynamic_cast<SubClase&>(*this)); 
-			}
-		
-			
+			}			
 };
 
 class Tablet : public ClonMobile<Mobiles,Tablet>
