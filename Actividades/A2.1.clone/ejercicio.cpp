@@ -30,8 +30,8 @@ class Tablet : public Mobiles
 {
 public:
 	Tablet(){};
-		string T;
-		Tablet(string marca, string Nserie,string a ,string b,string T): Mobiles(marca, Nserie,a,b),T(T)
+		string* T;
+		Tablet(string marca, string Nserie,string a ,string b,string T): Mobiles(marca, Nserie,a,b),T(new string (T))
 		{}
 		Tablet(const Tablet& p)
 		{
@@ -39,7 +39,7 @@ public:
 			Nserie = new string (*(p.Nserie));
 			a=p.a;
 			b=p.b;
-			T=p.T;
+			T = new string (*(p.T));
 		}
 	Mobiles* clone()
 	{ 
@@ -50,15 +50,16 @@ public:
 class Smartphone : public Mobiles
 {
 public:
-	string phone;
-	Smartphone(string marca, string Nserie,string a ,string b,string phone):Mobiles(marca, Nserie,a,b),phone(phone){}
+	string* phone;
+	Smartphone(){};
+	Smartphone(string marca, string Nserie,string a ,string b,string phone):Mobiles(marca, Nserie,a,b),phone(new string (phone)){}
 	Smartphone(const Smartphone& p)
 	{
 		marca = new string (*(p.marca));
 		Nserie = new string (*(p.Nserie));
 		a=p.a;
 		b=p.b;
-		phone=p.phone;
+		phone = new string (*(p.phone));
 	}
 	Mobiles* clone()
 	{ 
@@ -68,15 +69,16 @@ public:
 class Smartwatch : public Mobiles
 {
 public:
-	string watch;
-	Smartwatch(string marca, string Nserie,string a ,string b,string watch): Mobiles(marca, Nserie,a,b),watch(watch){}
+	string* watch;
+	Smartwatch(){};
+	Smartwatch(string marca, string Nserie,string a ,string b,string watch): Mobiles(marca, Nserie,a,b),watch(new string (watch)){}
 	Smartwatch(const Smartwatch& p)
 	{
 		marca = new string (*(p.marca));
 		Nserie = new string (*(p.Nserie));
 		a=p.a;
 		b=p.b;
-		watch=p.watch;
+		watch = new string (*(p.watch));
 	}
 	Mobiles* clone()
 	{ 
@@ -85,10 +87,70 @@ public:
 };
 int main()
 {
-	Tablet* c1 = new Tablet("ffr","353","353","353","353");
+	Tablet* c1 = new Tablet();
+	c1->encender();
+	c1->apagar();
+	c1->reiniciar();
+	c1->restaurar();
+	
+	c1->marca = new string("Apple");
+	c1->Nserie = new string("41NDUSJ78");
+	c1->a = "5.2 In";
+	c1->b = "af";
+	c1->T = new string("das");
+	
 	cout << *c1->marca << endl;
-		cout << *c1->Nserie << endl;
-		cout << (c1->a) << endl;
-		cout << (c1->b) << endl;
-		cout << (c1->T) << endl;
+	cout << *c1->Nserie << endl;
+	cout << (c1->a) << endl;
+	cout << (c1->b) << endl;
+	cout << *c1->T << endl<< endl;
+	
+
+	Tablet* p = dynamic_cast<Tablet*>(c1->clone()); //DownCasting 
+	
+	p->marca = new string("ASUS");
+	p->Nserie = new string("JKF94302");
+
+	cout << *p->marca << endl;
+	cout << *p->Nserie << endl;
+	cout << (p->a) << endl;
+	cout << (p->b) << endl;
+	cout << *c1->T << endl<< endl;
+	
+	Tablet* pp = dynamic_cast<Tablet*>(p->clone());
+	pp->a = "9.2";
+	pp->b = "polss";
+	
+	cout << *pp->marca << endl;
+	cout << *pp->Nserie << endl;
+	cout << (pp->a) << endl;
+	cout << (pp->b) << endl;
+	cout << *pp->T << endl;
+	
+	
+	Smartphone* c2 = new Smartphone();
+	c2->marca = new string("Apple");
+	c2->Nserie = new string("41NDUSJ78");
+	c2->a = "5.2 In";
+	c2->b = "af";
+	c2->phone = new string("das");
+		
+	cout << *c2->marca << endl;
+	cout << *c2->Nserie << endl;
+	cout << (c2->a) << endl;
+	cout << (c2->b) << endl;
+	cout << *c2->phone << endl<< endl;
+	
+	Smartwatch* c3 = new Smartwatch();
+	c3->marca = new string("Apple");
+	c3->Nserie = new string("41NDUSJ78");
+	c3->a = "3.2 In";
+	c3->b = "af";
+	c3->watch = new string("das");
+			
+	cout << *c3->marca << endl;
+	cout << *c3->Nserie << endl;
+	cout << (c3->a) << endl;
+	cout << (c3->b) << endl;
+	cout << *c3->watch << endl<< endl;
 }
