@@ -1,0 +1,29 @@
+@startuml
+
+class Invoker{
+  
+}
+class Client{
+  
+}
+class Command{
+ execute();   
+}
+
+class Reciver{
+  Action();
+}
+class ConcreteCommand{
+    state;
+ execute();   
+}
+note right of ConcreteCommand
+  Reciver->Action();
+end note
+
+Command <-o Invoker 
+Reciver <-Client
+Reciver <-ConcreteCommand:Reciver 
+Command <|-ConcreteCommand 
+Reciver <..ConcreteCommand 
+@end
