@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor osbert
+actor cliente
+rectangle Administracion{
+  osbert -- (oferta de cuadro) 
+  (oferta de cuadro) -- cliente
+  (rechaza oferta) -- cliente 
+  (oferta de cuadro) .> (rechaza oferta) : extend
+  (oferta de cuadro) .> (informacion del cuadro) : include
+  (oferta de cuadro) .> (informacion de venta) : include
+}
+@enduml
