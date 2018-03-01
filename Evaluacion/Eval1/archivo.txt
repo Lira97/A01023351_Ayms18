@@ -1,0 +1,6 @@
+1,Ernesto,weerty,phone,e@.com1,123454541,lf1,105,tlalpan 
+2, Ernesto, weerty,mail,e@.com2,12323578902,lf2,106, tlalpan
+3, Ernesto, weerty,mail,e@.com3,123456789564,lf3,107, tlalpan
+4,v, weerty,mail,e@.com4,12345678904,lf4,108, tlalpan
+5, Ernesto, weerty,mail,e@.com5,1234567645,lf5,109, tlalpan
+6, Ernesto,abasc weerty al6,sms,e@.com6,123456789564,lf6,110, tlalpan
