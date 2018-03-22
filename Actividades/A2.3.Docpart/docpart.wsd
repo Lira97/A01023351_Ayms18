@@ -1,0 +1,55 @@
+@startuml
+
+class IVisitor{
+  +virtual void visit(HyperLink)=0;
+  +virtual void visit(Text)=0;
+  +virtual void visit(Bold)=0;
+}
+class HTMLVisitor{
+   +void visit(HyperLink h);
+   +void visit(Bold b)
+   +void visit(Text t);
+  
+}
+class TextVisitor{
+   +void visit(HyperLink h);
+   +void visit(Bold b)
+   +void visit(Text t);
+  
+}
+class LatexVisitor{
+   +void visit(HyperLink h);
+   +void visit(Bold b)
+   +void visit(Text t);
+  
+}
+class Document{
+   -list<DocPart*> docpart;
+   +void accept(IVisitor* visitor)
+  
+}
+class Text{
+   +void accept(IVisitor* visitor);
+}
+class Bold{
+   +void accept(IVisitor* visitor);
+}
+class HyperLink{
+    +void accept(IVisitor* visitor);
+}
+
+class DocPart{
+    -string text;
+	+virtual void accept(IVisitor*)=0;
+}
+
+DocPart <|-- HyperLink
+DocPart <|-- Bold
+DocPart <|-- Text
+Document o-- DocPart
+IVisitor <-- Document
+IVisitor <|-- HTMLVisitor
+IVisitor <|-- TextVisitor
+IVisitor <|-- LatexVisitor
+
+@enduml
