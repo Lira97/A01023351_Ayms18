@@ -64,10 +64,8 @@ IntIterator<T>* IntCollection<T>:: getIterator(){
 int main(){
 	
 	IntCollection<int> c;
-	c.add(6);
-	c.add(7);
-	c.add(2);
-	c.add(9);
+	c.add("dsa");
+	
 	IntIterator<int>* i = c.getIterator();
 	while (i->hasNext()){
 		cout<< i->Next()<<" ";
