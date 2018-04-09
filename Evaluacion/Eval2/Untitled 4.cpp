@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <ctime>
+#include <stack>
+#include <memory>
 
 #define SIZE 8
 #define NUMBER_OBJECTS 7
@@ -73,6 +75,13 @@ template <class T>
 Iterator<T>* Collection<T>:: getIterator(){
 	return new Iterator<T>(*this);
 }
+
+class ICommand {
+	public:
+		virtual void execute() = 0;
+		virtual void undo() = 0;
+		virtual void redo() = 0;
+};
 
 /******** Clase Gráfico ********/
 class videojuego{
@@ -203,8 +212,6 @@ class Juego{
 			Musica* p7 = new Musica(); 	
 			juego->imprimir();
 		}
-
-		// Agrega el gráfico al tablero del juego
 		void agregarvideojuego (videojuego* g)
 		{
 			it = i.getIterator();
@@ -216,6 +223,7 @@ class Juego{
 			cont++;
 			
 		}
+		
 		void imprimir ()
 		{
 			for( int j = 0; j < videojuegos.size(); j++ )
@@ -247,9 +255,29 @@ class Juego{
 				}
 			 }
 		}
+};
 
+class TvSwitchChannelCommand : public ICommand {
+	Juego *mTv;
 
-	
+public:
+	TvSwitchChannelCommand(Tv *tv) {
+		mTv = tv;
+		mNewChannel = channel;
+	}
+
+	void execute() {
+		mOldChannel = mTv->getChannel();
+		mTv->switchChannel(mNewChannel); 
+	}
+
+	void undo() { 
+		mTv->switchChannel(mOldChannel);
+	}
+
+	void redo() { 
+		mTv->switchChannel(mNewChannel);
+	}
 };
 
 int main(){
