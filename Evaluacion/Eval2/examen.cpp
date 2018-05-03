@@ -10,9 +10,9 @@ class videojuego{
 public: 
 	int serie;
 	float precio;
-	string name; 
-	string company;
-	string console; 
+	string nombre; 
+	string compania;
+	string consola; 
 
 	videojuego()=default; 
 
@@ -65,54 +65,54 @@ public:
 class Lucha : public Estrategia{
 public:
 	Lucha(){
-		name = "Alien";
-		company = "GamesDC";
-		console = "PlayStation";
+		nombre = "Mortal kombat";
+		compania = "GamesAES";
+		consola = "PlayStation";
 	}
 };
 
 class Arcade : public Estrategia{
 public: 
 	Arcade(){
-		name = "Metal Slug";
-		company = "CG";
-		console = "PlayStation";
+		nombre = "Metal Slug";
+		compania = "CG";
+		consola = "PlayStation";
 	}
 };
 
 class Plataforma : public Aventura{
 public:
 	Plataforma(){
-		name = "bandiccot";
-		company = "PlayStation";
-		console = "PlayStation 3";   
+		nombre = "bandiccot";
+		compania = "PlayStation";
+		consola = "PlayStation 3";   
 	}
 };
 
 class Grafica : public Aventura{
 public: 
 	Grafica(){
-		name = "Mario galaxy";
-		company = "GraficaComp";
-		console = "PC";
+		nombre = "Mario galaxy";
+		compania = "Nintendo";
+		consola = "WII";
 	}
 };
 
 class Idiomas : public Aprendizaje{
 public: 
 	Idiomas(){
-		name = "Pipo";
-		company = "PipoGames";
-		console = "PC";
+		nombre = "laberitnos";
+		compania = "smartgames";
+		consola = "PlayStation";
 	}
 };
 
 class Musica : public Aprendizaje{
 public:
 	Musica(){
-		name = "Guitar Hero"; 
-		company = "Music";
-		console = "PlayStation";
+		nombre = "rock band";
+		compania = "Music";
+		consola = "PlayStation";
 	}
 };
 template<class T>
@@ -181,13 +181,13 @@ public:
 
 		}
 		else{
-			cout << "Espacio en el inventario insuficiente" << endl;
+			cout << "YA NOTIENES ESPACIO " << endl;
 		}
 	}
 
 	T at (int position){
 		if (0 > position){
-			cout << "índice no valido" << endl; 
+			cout << " no valido" << endl;
 			throw "out of range"; 
 		}
 	}
@@ -198,9 +198,9 @@ public:
 
 	void imprimirColl(){
 		for (int i = 0; i < cont; i++){
-			cout << "Nombre = " << array[i]->name <<
-			 ", " << "Compañia = " << array[i]->company << 
-			 ",  " << "Consola = " << array[i]->console <<
+			cout << "Nombre = " << array[i]->nombre <<
+			 ", " << "Compañia = " << array[i]->compania << 
+			 ",  " << "Consola = " << array[i]->consola <<
 			 ",  " << "Precio = " << array[i]->precio <<
 			 ",  " << "No. Serie = " << array[i]->serie << endl;
 		}
@@ -208,11 +208,11 @@ public:
 
 	void buscarColln(string n){
 		for(int i = 0; i < cont; i++){
-			if (n == array[i]->name){
+			if (n == array[i]->nombre){
 				cout << "No. Serie: " << array[i]->serie << endl;
-				cout << "Nombre: "<< array[i]->name << endl;
-				cout << "Compañia: " << array[i]->company << endl;
-				cout << "Consola: " << array[i]->console << endl;
+				cout << "Nombre: "<< array[i]->nombre << endl;
+				cout << "Compañia: " << array[i]->compania << endl;
+				cout << "Consola: " << array[i]->consola << endl;
 				cout << "Precio: " << array[i]->precio << endl;
 			}
 			else{
@@ -225,9 +225,9 @@ public:
 		for(int i = 0; i < cont; i++){
 			if (n == array[i]->serie){
 				cout << "No. Serie: " << array[i]->serie << endl;
-				cout << "Nombre: "<< array[i]->name << endl;
-				cout << "Compañia: " << array[i]->company << endl;
-				cout << "Consola: " << array[i]->console << endl;
+				cout << "Nombre: "<< array[i]->nombre << endl;
+				cout << "Compañia: " << array[i]->compania << endl;
+				cout << "Consola: " << array[i]->consola << endl;
 				cout << "Precio: " << array[i]->precio << endl;
 			}
 			else{
@@ -238,7 +238,7 @@ public:
 
 	void borrarCollN(string n){
 		for(int i = 0; i < cont; i++){
-			if (n == array[i]->name){
+			if (n == array[i]->nombre){
 				array[i] = NULL;
 				cont--;
 			}
@@ -315,7 +315,7 @@ public:
 	void crearjuego(){
 		Inventario* inventario = new Inventario(); 
 	}
-	void addGame (videojuego* v){
+	void agregarJuego (videojuego* v){
 		it = inv.getIterator();
 		inv.add(v);
 		i++;
@@ -418,31 +418,31 @@ void Aprendizaje::accept(IVisitor* visitor, float a){
 	visitor->visit(*this, a);
 }
 
-void submenu(int a);
+void menu2(int a);
 
 void MenuPrincipal(){
 
-	cout << "\nBienvenido" << endl;
-	cout << "\nQue deseas hacer ?" << endl;
+	cout << "\nSITEMA INVETARIO " << endl;
+
 	cout << 
-	"1.- Agregar juego al inventario\n"
-	"2.- Borrar un juego \n" 
-	"3.- Imprimir inventario\n" 
-	"4.- Buscar Juego\n"
-	"5.- Modificar precio\n" << endl;
+	"1.- AGREGAR  \n"
+	"2.- BORRAR  "
+	"3.- IMPRIMIR \n"
+	"4.- BUSCAR \n"
+	"5.- MODIFICAR \n" << endl;
 
 	int a;
 	cin >> a;
 
-	submenu(a);
+	menu2(a);
 	
 }
 
-void submenu(int a){
+void menu2(int a){
 
 	switch(a){
 		case 1:{
-			cout << "Tipo de juego quieres agregar\n"
+			cout << "QUE TIPO DE JUEGO DESEA AGREGAR\n"
 			"A.- Estrategia\n"
 			"B.- Aventura\n"
 			"C.- Aprendizaje\n" << endl;
@@ -463,7 +463,7 @@ void submenu(int a){
 							cin >> p;
 							Lucha* g1 = new Lucha(); 
 							g1->setPrice(p);
-							uno->addGame(g1);
+							uno->agregarJuego(g1);
 							MenuPrincipal();
 							break;
 						}
@@ -473,7 +473,7 @@ void submenu(int a){
 							cin >> p2;
 							Arcade* g1 = new Arcade(); 
 							g1->setPrice(p2);
-							uno->addGame(g1);
+							uno->agregarJuego(g1);
 							MenuPrincipal();
 							break;
 					}
@@ -492,7 +492,7 @@ void submenu(int a){
 							cin >> p3;
 							Plataforma* g1 = new Plataforma();
 							g1->setPrice(p3);
-							uno->addGame(g1);
+							uno->agregarJuego(g1);
 							MenuPrincipal();
 							break;
 						}
@@ -502,7 +502,7 @@ void submenu(int a){
 							cin >> p4;
 							Grafica* g1 = new Grafica();
 							g1->setPrice(p4);
-							uno->addGame(g1);
+							uno->agregarJuego(g1);
 							MenuPrincipal();
 							break;
 						}
@@ -521,7 +521,7 @@ void submenu(int a){
 							cin >> p5;
 							Idiomas* g1 = new Idiomas();
 							g1->setPrice(p5);
-							uno->addGame(g1);
+							uno->agregarJuego(g1);
 							MenuPrincipal();
 							break;
 						}
@@ -531,7 +531,7 @@ void submenu(int a){
 							cin >> p6;
 							Musica* g1 = new Musica();
 							g1->setPrice(p6);
-							uno->addGame(g1);
+							uno->agregarJuego(g1);
 							MenuPrincipal();
 							break;
 						}
@@ -595,9 +595,6 @@ void submenu(int a){
 					break;
 				}
 			}
-			break;
-		case 5:
-			//uno->ModTPrice("aumentar", 10);
 			break;
 		}
 	}  
