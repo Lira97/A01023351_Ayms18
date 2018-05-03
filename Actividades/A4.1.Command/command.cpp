@@ -1,63 +1,67 @@
-#include <iostream>  
-#include <string>  
+#include <iostream>
+
 using namespace std;
-class Persona;
 
-class Command
-{
-		Persona *object;  
-		void(Persona:: *method)();
-	public:
-		Command(Persona *obj = 0, void(Persona:: *meth)() = 0)
-		{
-				object = obj; 
-				method = meth;
-		}
-		void execute()
-		{
-				(object-> *method)();
-		}
+class Command {
+public:
+	virtual void execute() = 0;
 };
 
-class Persona
-{
-		string name;
-
-		
-		Command cmd; 
-	public:
-		Persona(string n, Command c): cmd(c)
-		{
-				name = n;
-		}
-		void talk()
-		{
-				
-				cout << name << " is talking" << endl;
-				cmd.execute(); 
-		}
-		void passOn()
-		{
-				cout << name << " is passing on" << endl;
-				cmd.execute(); 
-		}
-		void gossip()
-		{
-				cout << name << " is gossiping" << endl;
-				cmd.execute();
-		}
-		void listen()
-		{
-				cout << name << " is listening" << endl;
-		}
+class Receiver {
+public:
+	void Funcion1() {
+		cout << "funcion1";
+	}
+	void Funcion2() {
+		cout << "funcion2";
+	}
 };
 
-int main()
-{
+class Caller {
+public:
+	void setCommand(Command *com) {
+		my_cmd = com;
+	}
+	void executeAction() {
+		my_cmd->execute();
+	}
+private:
+	Command *my_cmd;
+};
 
-	Persona wilma("Wilma", Command());
-	Persona betty("Betty", Command(&wilma, &Persona::listen));
-	Persona barney("Barney", Command(&betty, &Persona::gossip));
-	Persona fred("Fred", Command(&barney, &Persona::passOn));
-	fred.talk();
+class ConcreteCommand1 : public Command {
+public:
+	ConcreteCommand1(Receiver *rev) : r(rev) { }
+	void execute() {
+		r -> Funcion1();
+	}
+private:
+	Receiver *r;
+};
+
+class ConcreteCommand2 : public Command {
+public:
+	ConcreteCommand2(Receiver *rev) : r(rev) { }
+	void execute() {
+		r -> Funcion2();
+	}
+private:
+	Receiver *r;
+};
+
+// Invoker
+int main() {
+	Receiver *r = new Receiver;
+	
+	ConcreteCommand1 *c1 = new ConcreteCommand1(r);
+	ConcreteCommand2 *c2 = new ConcreteCommand2(r);
+	
+	Caller *c = new Caller;
+	
+	c->setCommand(c1);
+	c->executeAction();
+	c->setCommand(c2);
+	c->executeAction();
+	
+	return 1;
 }

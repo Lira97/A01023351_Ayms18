@@ -64,7 +64,11 @@ IntIterator<T>* IntCollection<T>:: getIterator(){
 int main(){
 	
 	IntCollection<int> c;
-	c.add("dsa");
+	c.add(6);
+	c.add(3);
+	c.add(1);
+	c.add(5);
+	c.add(9);
 	
 	IntIterator<int>* i = c.getIterator();
 	while (i->hasNext()){

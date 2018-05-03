@@ -93,12 +93,6 @@ class Document
 			return out;
 		}		
 };
-class IVisitor
-{
-	public:
-		void 	
-};
-
 int main() 
 {
 	Document d;
